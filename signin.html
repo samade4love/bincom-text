@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta http-equiv="Content-Security" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i" rel="stylesheet" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+        <link rel="stylesheet" href="style.css">
+    <title>Sign in</title>
+</head>
+<body>
+    
+    <div class="header">
+        <div class="nav">
+            <div class="nav-name">
+                <p><a href="../index.html">Afolabi's Blog</a></p>
+            </div>
+            <div class="nav-bar">
+                <ul>
+                    <li style="background-color: greenyellow;"><a href="#">Sign in</a></li>
+                    <li><a href="#">Sign up</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="app-content">
+        <div class="form">
+          <label>Add new post</label>
+          <div class="form-group">
+            <form>
+              <div class="user">
+                <input type="text" class="title" placeholder="TITLE">
+              </div>
+              <textarea name="" class="area" cols="29" rows="5" placeholder="Write your post"></textarea>
+              <button class="btn">Submit</button>
+            </form>
+          </div>
+        </div>
+    </div>
+    <div class="body-head">
+        <div class="body-nav">
+            <h3>New Update:</h3>
+            <div class="get-post"></div>
+        </div>
+    </div>
+    <div class="side-nav">
+        <h2>Additional Information</h2>
+        <div class="side-bar-group">
+            <h4>Why yes or no</h4>
+            <p><img src="../img/image2.jpg">the yes the you is always for any of the two mentioned above. so keep watch and say any of the two</p>
+        </div>
+    </div>
+    <div class="side-bar-nav">
+        <div class="get-group">
+            <div class="get-img">
+                <h3>Categories of incident</h3>
+                <p>Acident</p>
+                <p>Fight</p>
+                <p>Black party</p>
+                <p>Red Capet</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    var url = 'https://trompe-loeil-hum.000webhostapp.com/wp-json/wp/v2/posts';
+        var postsContainer = document.querySelector('.get-post');
+
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            data.map( post => {
+                var innerContent =
+                `
+                <h2>${post.title.rendered}</h2>
+                <h4>Time posted ${post.date}</h4>
+                <p>${post.excerpt.rendered}</p>
+            <h6><a href="${post.link}">Read more</a></h6>
+                `;
+                postsContainer.innerHTML += innerContent;
+                console.log(innerContent);
+            })
+        });
+    document.querySelector('.btn').addEventListener('click', (e) => {
+    var tit = document.querySelector('.title').value;
+    var are = document.querySelector('.area').value;
+    var ate = new Date();
+
+    var cret = document.createElement('div');
+    cret.innerHTML = `
+            <h2>${tit}</h2>
+            <h4>Time posted ${ate}</h4>
+            <p>${are}</p>
+        <h6><a href="#">Read more</a></h6>
+    `;
+    var add = document.querySelector('.get-post');
+    add.appendChild(cret);
+
+    if(tit !== "" || are !== ""){
+        document.querySelector('.title').value = "";
+        document.querySelector('.area').value = ""
+    } else {
+        cret.innerHTML = "";
+    }
+
+    e.preventDefault();
+});
+    </script>
+</body>
+</html>
